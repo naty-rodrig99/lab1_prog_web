@@ -8,11 +8,15 @@ const model = {
     currentDishId: null,  // null means "intentionally empty"
 
     setCurrentDishId(dishId){
+        this.currentDishId = dishId;
         // this.someProperty= someValue
     },
     
     setNumberOfGuests(number){
-
+        if((number <= 0) || (!Number.isInteger(number))){
+            throw new Error("number of guests not a positive integer");
+        }
+        return this.numberOfGuests = number;
     },
     
     addToMenu(dishToAdd){
