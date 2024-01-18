@@ -1,11 +1,23 @@
 /* uncomment the export below to enable the 1.1.2 test suite! */
-/* export */ function compareIngredientsCB(ingredientA, ingredientB){
-    return // TODO
+//Export used so the method can be used outside the Module
+export function compareIngredientsCB(ingredientA, ingredientB){
+    if(ingredientA.aisle != ingredientB.aisle){
+        if(ingredientA.aisle > ingredientB.aisle){
+            return 1;}
+        if(ingredientA.aisle < ingredientB.aisle){ 
+            return -1;}
+    } else{
+        if(ingredientA.name > ingredientB.name){
+            return 1;}
+        if(ingredientA.name < ingredientB.name){ 
+            return -1;} 
+    }
+    return 0;
 }
 
-
 export function sortIngredients(ingredients){
-    return // TODO
+    const ing = ingredients.sort(compareIngredientsCB);
+    return ing;
 }
 
 // helper object for isKnownType and dish sorting
