@@ -15,9 +15,11 @@ export function compareIngredientsCB(ingredientA, ingredientB){
     return 0;
 }
 
+//When sort needs to, it invokes the callback, becuase is a higher order function
+//Doing a copy of the array aviods infinite looping, becuase if the application state changes 
+//everything else will also change
 export function sortIngredients(ingredients){
-    const ing = ingredients.sort(compareIngredientsCB);
-    return ing;
+    return [...ingredients].sort(compareIngredientsCB);
 }
 
 // helper object for isKnownType and dish sorting
@@ -28,18 +30,28 @@ const dishTypeRanking={
     "":0              // property name is the empty string
 };
 
-/* export */ function isKnownTypeCB(type){
+ export function isKnownTypeCB(type){
     // don't forget the return keyword (goes for all functions below)
-}
+    return dishTypeRanking[type];  //this is a way to access a property of an object:
+} 
 
-export function dishType(dish){
+export function dishType(dish){ 
+    if(!dish.dishTypes){
+        return ""
+    }
+    //Object.values() returns an array
+    if(Object.values(dish.dishTypes).filter(isKnownTypeCB) <= 0){
+        return "";
+    } else{
+        return Object.values(dish.dishTypes).filter(isKnownTypeCB)[0];
+    }
 }
 
 /* export */ function compareDishesCB(dishA, dishB){
 }
 
 
-export function sortDishes(dishes){
+/*export*/ function sortDishes(dishes){
 }
 
 /*export */ function menuPrice(dishesArray){
