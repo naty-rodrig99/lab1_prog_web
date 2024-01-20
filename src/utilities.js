@@ -35,6 +35,7 @@ const dishTypeRanking={
     return dishTypeRanking[type];  //this is a way to access a property of an object:
 } 
 
+
 export function dishType(dish){ 
     if(!dish.dishTypes){
         return ""
@@ -47,15 +48,22 @@ export function dishType(dish){
     }
 }
 
-/* export */ function compareDishesCB(dishA, dishB){
+
+ export function compareDishesCB(dishA, dishB){
+    return dishTypeRanking[dishType(dishA)] - dishTypeRanking[dishType(dishB)];
 }
 
 
-/*export*/ function sortDishes(dishes){
+export function sortDishes(dishes){
+    return [...dishes].sort(compareDishesCB);
 }
 
-/*export */ function menuPrice(dishesArray){
- 
+
+export function menuPrice(dishesArray){
+    function sumDishesCB(acc, dish){
+        return acc + dish.pricePerServing;
+      }
+    return dishesArray.reduce(sumDishesCB, 0);
 }
 
 /* 
@@ -66,7 +74,7 @@ export function dishType(dish){
    
    As this is not an algorithm course, the function is mostly written but you have 2 callback passing TODOs.
 */
-function shoppingList(dishes){
+export function shoppingList(dishes){
     const result={}; // object used as mapping between ingredient ID and ingredient object
 
     // we define the callback inside the function, though this is not strictly needed in this case. But see below.
@@ -96,9 +104,11 @@ function shoppingList(dishes){
         }
     }
 
-    const arrayOfIngredientArrays= dishes.map(/*TODO pass the callback that transforms a dish to its ingredients */);
+    const arrayOfIngredientArrays= dishes.map(keepJustIngredientsCB);
+    /*TODO pass the callback that transforms a dish to its ingredients */
     const allIngredients= arrayOfIngredientArrays.flat();    
-    allIngredients.forEach(/* TODO: pass the callback that treats an ingredient */);
+    allIngredients.forEach(ingredientCB);
+    /* TODO: pass the callback that treats an ingredient */
 
     // Note: the 3 lines above can be written as a function chain:
     // dishes.map(callback1).flat().forEach(callback2);
