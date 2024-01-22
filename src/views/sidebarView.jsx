@@ -23,7 +23,7 @@ export function SidebarView(props){
                   <td></td>
                   <td>Total:</td>
                   <td></td>
-                  <td class="right-align">{(menuPrice(props.dishes)).toFixed(2)}</td>
+                  <td class="right-align">{(menuPrice(props.dishes)*props.number).toFixed(2)}</td>
                 </tr>
               </table>
     </div>);
