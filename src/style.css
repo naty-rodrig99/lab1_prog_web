@@ -2,3 +2,7 @@
 .debug {
     border-style:solid;
 }
+
+td.right-align{
+    text-align:right;
+}
