@@ -5,12 +5,22 @@ export function SidebarView(props){
     function checknumber(nprops){
         return nprops <= 1;
     }
-    
+
+    //asyncronous callback, pass the callback but don't know were is it going to be called, the user controls it
+    //ABC means it is asyncronous
+    function negativeHandlerABC(evt){
+      props.onNumberChange(props.number - 1); //this "fires" a custom
+    }
+
+    function positiveHandlerABC(evt){
+      props.onNumberChange(props.number + 1);
+    }
+
     return (
     <div>
-            <button disabled={checknumber(props.number)}>-</button>
+            <button disabled={checknumber(props.number)} onClick ={negativeHandlerABC} value={props.number}>-</button>
             <span title="props number">{props.number}</span>
-            <button>+</button>
+            <button onClick ={positiveHandlerABC} value={props.number}>+</button>
 
             <table>
                 <tbody>
@@ -30,11 +40,24 @@ export function SidebarView(props){
 
         /* callback for Array Rendering */
         function dishesTableRowCB(dish){
+            
+          //custom event
+          //Created inside the function to have access to dish
+            function dishClickedHandlerABC(evt){
+              props.onDishClick(dish);
+          }
+
+          function xClickedHandlerABC(evt){
+            props.deleteDish(dish);
+        }
             return <tr key={ /* Reflect on what's a key in array rendering! */ dish.id } >
-                     <td><button>X</button></td>
-                     <td><a href="#">{dish.title}</a></td>
+                     <td><button onClick={xClickedHandlerABC}>X</button></td>
+                     <td><a href="#" onClick={dishClickedHandlerABC}>{dish.title}</a></td>
                      <td>{dishType(dish)}</td>
                      <td class="right-align">{(dish.pricePerServing*props.number).toFixed(2)}</td>
                    </tr>;
         }
 }
+
+
+

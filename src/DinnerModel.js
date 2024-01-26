@@ -27,8 +27,9 @@ const model = {
 
     // filter callback exercise
     removeFromMenu(dishToRemove){
+        console.log(dishToRemove)
         function shouldWeKeepDishCB(dish){
-            return dish.dishId !== dishToRemove.dishId;
+            return dish.id !== dishToRemove.id;
         }
         this.dishes = this.dishes.filter(shouldWeKeepDishCB);
     },

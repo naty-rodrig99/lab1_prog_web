@@ -18,13 +18,17 @@ import { createApp, h } from "vue";
 window.React= {createElement:h};  // needed in the lab because it works with both React and Vue
 
 import { VueRoot } from "./VueRoot.jsx";
-const app= createApp(<VueRoot model={model} />);
+const app= createApp(<VueRoot model={model} />, onNumberChange={customEventHandlerABC}, onDishClick={customEventHandlerABC});
 
 
 app.mount('#root'); // mounts the app in the page DIV with the id "root"
 // to see the DIV, look at vue.html in the developer tools Sources
 // vue.html, with the content <div id="root"></div> is configured in vite.config.js
 
+//custom event
+function customEventHandlerABC(dish){
+    console.log(dish);
+  }
 
 // ------ for debug purposes ----------
 window.myModel= model;             // make the model available in the Console
