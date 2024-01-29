@@ -9,7 +9,7 @@ export function SidebarView(props){
     //asyncronous callback, pass the callback but don't know were is it going to be called, the user controls it
     //ABC means it is asyncronous
     function negativeHandlerABC(evt){
-      props.onNumberChange(props.number - 1); //this "fires" a custom
+      props.onNumberChange(props.number - 1); //this "fires" a custom event
     }
 
     function positiveHandlerABC(evt){
@@ -41,7 +41,7 @@ export function SidebarView(props){
         /* callback for Array Rendering */
         function dishesTableRowCB(dish){
             
-          //custom event
+          //native event which fires a custome event
           //Created inside the function to have access to dish
             function dishClickedHandlerABC(evt){
               props.onDishClick(dish);
